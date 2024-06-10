@@ -22,7 +22,7 @@ const ControlContainer = ({ target=[0,0,0], children }) => {
                 // minPolarAngle={Math.PI/4}
 
                 // inverse the rotate direction
-                // rotateSpeed={-.5}
+                rotateSpeed={-.5}
             />
             {children}
         </ControlsContext.Provider>
