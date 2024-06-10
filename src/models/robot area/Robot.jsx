@@ -11,6 +11,7 @@ import Tooltip from "../../components/Tootlip";
 import useMainStore from "../../store/useMainStore";
 import { FOCUS_LECTURER } from "../../constants";
 import LecturerPage from "../../html/LecturerPage";
+import { useResponsiveScreen } from "../../utils";
 
 const Robot = ({ nodes, materials, lecturer, gender='male', isShow, ...props }) => {
     // Get state and setter from the store
@@ -18,6 +19,7 @@ const Robot = ({ nodes, materials, lecturer, gender='male', isShow, ...props }) 
     const setFocusTarget = useMainStore.useSetFocusTarget()
     const setCameraPosition = useMainStore.useSetCameraPosition()
     const setControlsTargetOffset = useMainStore.useSetControlsTargetOffset()
+    const {isMobile} = useResponsiveScreen()
 
     const { scene, materials: robot_materials } = useGLTF(process.env.REACT_APP_ROBOT_MODEL_URL)
     const scene_clone = SkeletonUtils.clone(scene)
@@ -62,7 +64,7 @@ const Robot = ({ nodes, materials, lecturer, gender='male', isShow, ...props }) 
             setIsHovered(false)
             setIsFocused(true)
             setFocusTarget(FOCUS_LECTURER)
-            setCameraPosition([-2, 1.5, positionZ])
+            setCameraPosition([isMobile?-1.5:-2, 1.5, positionZ])
             setControlsTargetOffset([-.01,0,0])
         }
     }, [focusTarget, positionZ])
@@ -104,7 +106,7 @@ const Robot = ({ nodes, materials, lecturer, gender='male', isShow, ...props }) 
                         }}>{lecturer.name}</p>
                     </Tooltip>
 
-                    <LecturerPage lecturer={lecturer} shown={isFocused} position={[0,1.25,-1.75]} scale={[.1, .1, .1]} rotation={[0, Math.PI / 2, 0]}/>
+                    <LecturerPage lecturer={lecturer} shown={isFocused} position={[0,1.25,isMobile?0:-1.75]} scale={[.1, .1, .1]} rotation={[0, Math.PI / 2, 0]}/>
                 </group>
             </Select>
         </>

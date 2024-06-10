@@ -17,14 +17,15 @@ import LogoArea from './logo area/LogoArea'
 import HelixArea from './helix area/HelixArea'
 import { ControlsContext } from '../context/ControlsContext'
 import useMainStore from '../store/useMainStore'
-import { addVector3 } from '../utils'
+import { addVector3, useResponsiveScreen } from '../utils'
 
 const Lab = (props) => {
 
   // get the state and setter from the store
   const focusTarget = useMainStore.useFocusTarget()
-  const cameraPosition = useMainStore.useCameraPosition()
+  let cameraPosition = useMainStore.useCameraPosition()
   const controlsTargetOffset = useMainStore.useControlsTargetOffset()
+  const {isMobile} = useResponsiveScreen()
 
   const controlsTarget = addVector3(cameraPosition, controlsTargetOffset)
 
@@ -48,8 +49,11 @@ const Lab = (props) => {
         // enable control rotation
         controls.current.enableRotate = true
 
+        let camPos = [...cameraPosition]
+        if (isMobile) camPos = camPos.map(val => val * 4 / 3)
+
         // animate back camera to original position 
-        gsap.to(camera.position, {duration: 1, x: cameraPosition[0], y: cameraPosition[1], z: cameraPosition[2]})
+        gsap.to(camera.position, {duration: 1, x: camPos[0], y: camPos[1], z: camPos[2]})
         gsap.to(controls.current.target, {duration: 1, x: controlsTarget[0], y: controlsTarget[1], z: controlsTarget[2]})
       }
     }

@@ -6,6 +6,7 @@ import Tooltip from "../../components/Tootlip"
 import useMainStore from "../../store/useMainStore"
 import { FOCUS_FACILITIES } from "../../constants"
 import FacilitiesPage from "../../html/FacilitiesPage"
+import { useResponsiveScreen } from "../../utils"
 
 const CommandCenterArea = ({ nodes, materials }) => {
 
@@ -14,6 +15,7 @@ const CommandCenterArea = ({ nodes, materials }) => {
     const setFocusTarget = useMainStore.useSetFocusTarget()
     const setCameraPosition = useMainStore.useSetCameraPosition()
     const setControlsTargetOffset = useMainStore.useSetControlsTargetOffset()
+    const {isMobile} = useResponsiveScreen()
     const ref = React.useRef()
 
     const [isHovered, setIsHovered] = React.useState(false)
@@ -32,9 +34,10 @@ const CommandCenterArea = ({ nodes, materials }) => {
 
     const onClick = React.useCallback(() => {
         if (focusTarget === null) {
+            const cameraPosition = isMobile ? [-1.897, 1.5, -3] : [-1.897, 1.5, -3.5]
             setIsHovered(false)
             setFocusTarget(FOCUS_FACILITIES)
-            setCameraPosition([-1.897, 1.5, -3.5])
+            setCameraPosition(cameraPosition)
             setControlsTargetOffset([0,0,-.01])
         }
     }, [focusTarget])

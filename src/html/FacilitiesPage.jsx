@@ -37,6 +37,7 @@ const FacilitiesPage = () => {
                 }}
             >
                 <div className={styles.container} >
+                    <h1 className={styles.title}>Fasilitas</h1>
                     <ul className={styles.list}>
                         <li>Processor Intel Core i3 Gen-3, i5 Gen-8,  Intel® Xeon® E5-2640 dengan RAM 4GB-16GB, Sampai dengan Processor i9 Generasi 12 GPU 3080TI</li>
                         <li>Untuk HDD sebagian besar minimal 1TB.</li>

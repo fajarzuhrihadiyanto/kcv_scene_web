@@ -6,6 +6,7 @@ import styles from './styles/GeneralInformation.module.css'
 import buttonStyles from './styles/Buttons.module.css'
 import useMainStore from "../store/useMainStore"
 import { FOCUS_BOOKS, FOCUS_COMMUNITY_SERVICE, FOCUS_RESEARCH, FOCUS_SUBJECT } from "../constants"
+import { useResponsiveScreen } from "../utils"
 
 const GeneralInformation = () => {
 
@@ -15,6 +16,7 @@ const GeneralInformation = () => {
     const setControlsTargetOffset = useMainStore.useSetControlsTargetOffset()
     const isIndustrialRobotFocused = useMainStore.useIsIndustrialRobotFocused()
     const setIsIndustrialRobotFocused = useMainStore.useSetIsIndustrialRobotFocused()
+    const {isMobile} = useResponsiveScreen()
 
     const ref = React.useRef()
     const buttonRef = React.useRef()
@@ -53,9 +55,10 @@ const GeneralInformation = () => {
     }, [])
 
     const onButtonClick = React.useCallback(focusTarget => {
+        const cameraPosition = isMobile ? [.9,1.5,0] : [2,1.5,0]
         setIsIndustrialRobotFocused(false)
         setFocusTarget(focusTarget)
-        setCameraPosition([2,1.5,0])
+        setCameraPosition(cameraPosition)
         setControlsTargetOffset([.01,0,0])
     }, [])
 

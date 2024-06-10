@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer, Outline, Selection } from "@react-three/postprocessing";
 
 import Lab from "./models/Lab";
-import { addVector3 } from "./utils";
+import { addVector3, useResponsiveScreen } from "./utils";
 import ControlContainer from "./context/ControlsContext";
 import BackButton from "./components/BackButton";
 import { Suspense } from "react";
@@ -10,8 +10,9 @@ import Loader from "./models/Loader";
 
 
 function App() {
-  const cameraPosition = [-1.5,2,0]
-  const controlsTargetOffset = [1.5,0,0]
+  const {isMobile} = useResponsiveScreen()
+  const cameraPosition = [isMobile?-2.5:-1.5,0,0]
+  const controlsTargetOffset = [isMobile?-2.5:1.5,2,0]
   const controlsTarget = addVector3(cameraPosition, controlsTargetOffset)
   return (
     <div className="App" style={{width: '100vw', height: '100vh'}}>
