@@ -10,16 +10,14 @@ import Loader from "./models/Loader";
 
 
 function App() {
-  const {isMobile} = useResponsiveScreen()
-  const cameraPosition = [isMobile?-2.5:-1.5,0,0]
-  const controlsTargetOffset = [isMobile?-2.5:1.5,2,0]
+  const cameraPosition = [-1.5,0,0]
+  const controlsTargetOffset = [1.5,2,0]
   const controlsTarget = addVector3(cameraPosition, controlsTargetOffset)
   return (
     <div className="App" style={{width: '100vw', height: '100vh'}}>
       {/* IMPORTANT : DO NOT SET FRAMELOOP TO DEMAND, SOMETIME IT WILL STOP THE ANIMATION RENDERING */}
       <Canvas camera={{position: cameraPosition}}>
         <Suspense fallback={<Loader />}>
-          {/* <Loader /> */}
           <ambientLight intensity={2} />
           <ControlContainer target={controlsTarget}>
             

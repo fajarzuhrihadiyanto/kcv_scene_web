@@ -50,7 +50,7 @@ const Lab = (props) => {
         controls.current.enableRotate = true
 
         let camPos = [...cameraPosition]
-        if (isMobile) camPos = camPos.map(val => val * 4 / 3)
+        if (isMobile) camPos[0] *= 5/3
 
         // animate back camera to original position 
         gsap.to(camera.position, {duration: 1, x: camPos[0], y: camPos[1], z: camPos[2]})
