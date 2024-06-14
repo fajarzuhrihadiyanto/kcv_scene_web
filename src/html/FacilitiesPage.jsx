@@ -4,11 +4,13 @@ import { Html } from "@react-three/drei"
 import styles from './styles/FacilitiesPage.module.css'
 import useMainStore from "../store/useMainStore"
 import { FOCUS_FACILITIES } from "../constants"
+import useDataStore from "../store/dataStore"
 
 const FacilitiesPage = () => {
 
     // Get state and setter from the store
     const focusTarget = useMainStore.useFocusTarget()
+    const facilities = useDataStore.useFacilities()
 
     // setting ref for the screen
     const screenRef = React.useRef()
@@ -39,12 +41,7 @@ const FacilitiesPage = () => {
                 <div className={styles.container} >
                     <h1 className={styles.title}>Fasilitas</h1>
                     <ul className={styles.list}>
-                        <li>Processor Intel Core i3 Gen-3, i5 Gen-8,  Intel® Xeon® E5-2640 dengan RAM 4GB-16GB, Sampai dengan Processor i9 Generasi 12 GPU 3080TI</li>
-                        <li>Untuk HDD sebagian besar minimal 1TB.</li>
-                        <li>Semua monitor berukuran 19″ untuk memudahkan mahasiswa dalam melakukan penelitian dan pembelajaran.</li>
-                        <li>Dilengkapi LED TV 55″ untuk mahasiswa dalam melakukan demo pembelajaran.</li>
-                        <li>LCD Projector untuk memudahkan mahasiswa yang membutuhkan beberapa display.</li>
-                        <li>Ploter Untung menunjang kebutuhan mahasiswa mencetak hasil tugas2 yang dibutuhkan.</li>
+                        {facilities.map((facility, index) => <li key={index}>{facility.name}</li>)}
                     </ul>
                 </div>
             </Html>

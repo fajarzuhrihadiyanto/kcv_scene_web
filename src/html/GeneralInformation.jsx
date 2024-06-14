@@ -7,6 +7,7 @@ import buttonStyles from './styles/Buttons.module.css'
 import useMainStore from "../store/useMainStore"
 import { FOCUS_BOOKS, FOCUS_COMMUNITY_SERVICE, FOCUS_RESEARCH, FOCUS_SUBJECT } from "../constants"
 import { useResponsiveScreen } from "../utils"
+import useDataStore from "../store/dataStore"
 
 const GeneralInformation = () => {
 
@@ -16,6 +17,7 @@ const GeneralInformation = () => {
     const setControlsTargetOffset = useMainStore.useSetControlsTargetOffset()
     const isIndustrialRobotFocused = useMainStore.useIsIndustrialRobotFocused()
     const setIsIndustrialRobotFocused = useMainStore.useSetIsIndustrialRobotFocused()
+    const labDescription = useDataStore.useLabDescription()
     const {isMobile} = useResponsiveScreen()
 
     const ref = React.useRef()
@@ -71,7 +73,7 @@ const GeneralInformation = () => {
                     className={styles.html}>
                     <div className={styles.container}>
                         <h1 className={styles.title}>Selamat Datang di halaman Laboratorium Komputasi Cerdas dan Visi.</h1>
-                        <p className={styles.description}>Di Laboratorium ini ditawarkan bidang keahlian yang ditekankan pada kemampuan lulusan dalam memanipulasi dan menganalisis data citra pada berbagai bidang aplikasi (a.l. biomedika, industri), kemampuan menerapkan metode sistem cerdas pada berbagai bidang aplikasi dan kemampuan memodelkan dan mengoptimasikan sistem nyata.</p>
+                        <p className={styles.description}>{labDescription}</p>
                     </div>
                 </Html>
             </group>

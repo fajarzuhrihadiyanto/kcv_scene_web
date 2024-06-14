@@ -4,19 +4,20 @@ import React from "react"
 import gsap from "gsap"
 
 import useMainStore from "../../store/useMainStore"
-import { LECTURERS } from "../../data/lecturers"
+import useDataStore from "../../store/dataStore"
 
 const RobotArea = ({ nodes, materials }) => {
 
     // Get state and setter from the store
     const focusTarget = useMainStore.useFocusTarget()
+    const professors = useDataStore.useProfessors()
 
     // Set the initial state of the hover states each button
     const [prevHovered, setPrevHovered] = React.useState(false)
     const [nextHovered, setNextHovered] = React.useState(false)
     
     // Calculate the number of slides needed
-    const total = LECTURERS.length
+    const total = professors.length
     const lecturerPerSlide = 3
     const numSlides = Math.ceil(total / lecturerPerSlide)
 

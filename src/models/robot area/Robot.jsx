@@ -103,7 +103,7 @@ const Robot = ({ nodes, materials, lecturer, gender='male', isShow, ...props }) 
                             margin: 0,
                             fontSize: '6pt',
                             textAlign: 'center'
-                        }}>{lecturer.name}</p>
+                        }}>{lecturer.fullname}</p>
                     </Tooltip>
 
                     <LecturerPage lecturer={lecturer} shown={isFocused} position={[0,1.25,isMobile?0:-1.75]} scale={[.1, .1, .1]} rotation={[0, Math.PI / 2, 0]}/>
